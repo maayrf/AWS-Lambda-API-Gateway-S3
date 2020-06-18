@@ -1,0 +1,40 @@
+S3:
+Crie um bucket com configurações de acesso totalmente público;
+Habilite o site estático e coloque index.html como arquivo principal;
+Suba o arquivo index.html, e dê permissões públicas para o arquivo;
+
+LAMBDA:
+Crie uma stack no LAMBDA;
+Nomeie, coloque linguagem como node.js, crie uma nova função e a nomeie (não defina template para ela);
+Crie um teste com esse formato:
+Crie um novo teste com base no “hello-world”:
+{
+  "from": "mayara",
+  "subject": "projetinho",
+  "message": "oie"
+}
+
+API GATEWAY:
+Crie uma API;
+Resource name e path “formulario”;
+Habilite o CORS;
+Crie com método POST;
+Integre ao Lambda;
+Deploy API - Stage name = v1
+Copie o end-point do API-GATEWAY e cole no index.html do S3. Ficará mais ou menos assim (Subir um novo index.html com essa alteração):
+      var url =
+        "https://myapi.us-east-1.amazonaws.com/v1/formulario";
+
+AINDA NO API GATEWAY:       
+Crie o /path
+Crie um método (POST)
+Integração com Lambda e selecione o Lambda criado
+
+TESTE-O:
+Coloque no browser a URL do index.html no S3, clique no F12 e veja as reações do seu código ao preencher o formulário (tem que retornar 200);
+.
+.
+.
+Referência Bibliográfica:
+https://medium.com/awsugsp/hospedagem-de-sites-est%C3%A1ticos-na-aws-com-s3-api-gateway-e-lambda-ef5ccdcc3311
+
