@@ -1,0 +1,59 @@
+<html>
+<head>
+ <title>Meu Website</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+ <h1>Hello AWS!</h1>
+ <form id=”contactForm” action=”#” method=”post”>
+ <div>
+ <label for="from">Seu nome:</label>
+ <input type=”text” name="from" >
+ </div>
+ <div>
+ <label for="subject">Assunto:</label>
+ <input type=”text” name="subject">
+ </div>
+ <div>
+ <label for=”message”>Mensagem:</label>
+ <textarea name="message" id="message"rows="8" cols="80"></textarea>
+ </div>
+ <button id="submit-button" name=”button”>Enviar</button>
+ </form>
+ 
+<div>
+    Resultado: <p id=”formResult”></p>
+</div>
+ </div>
+</body>
+
+<script type="text/javascript">
+    $("#submit-button").click(function (event) {
+      event.preventDefault();
+      
+      var url =
+        "https://hy7bjhzmec.execute-api.us-east-1.amazonaws.com/v1/projetinho";
+      var formData = $(this);
+
+      let from = $("input[name=from]").val();
+      let subject = $("input[name=subject]").val();
+      let message = $("#message").val();
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify({from, subject, message}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        success: function (response) {
+          $("#formResult").html(response.resultado);
+        },
+        error: function (err) {
+          var response = JSON.parse(err.responseText);
+          $("#formResult").html(response.resultado);
+        },
+      });
+    });
+    </script>
+</html>
